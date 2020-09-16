@@ -1,0 +1,83 @@
+Mario Party 2 Addresses
+
+Mp2 insta boot
+s16 ROM: 1D316
+s16 RAM: 8001C714
+ADDIU a0, r0, 0x0057 -> ADDIU a0, r0, 0x003E
+//to do
+//make all players but player 1 a CPU, maybe take their items because
+//using items takes forever and they will use them
+
+
+DATA:
+800F8CE2 - 800F8D1C Board RAM (RAM that gets saved when quitting and loading a board)
+800FD418 - s16		hidden block space index
+800E1FD0 - array 	valid hidden block spaces
+800FA63C - s32 		cur_scene
+
+
+FUNCTIONS:
+func_80056368 - ShowMessage1
+func_800563A8 - ShowMessage2
+func_800563FC - ShowMessage3
+func_80056144 - CloseMessage1
+func_80056168 - CloseMessage2
+func_8007C4E4 - func_dma_copy; ROM start, RAM start, length of DMA
+func_800771EC - ? //somehow releated to func_800770EC
+func_800770EC - func_change_scene (?)
+
+STRUCTS/ENUMS:
+
+typedef struct {
+/* 0x00 */ char unk_00[4];
+/* 0x04 */ u8 characterID;
+/* 0x05 */ char unk_05[3];
+/* 0x08 */ s16 coins;
+/* 0x0A */ char unk_0A[4];
+/* 0x0E */ s16 stars;
+/* 0x10 */ s16 cur_chain_index;
+/* 0x12 */ s16 cur_space_index;
+/* 0x14 */ s16 next_chain_index;
+/* 0x16 */ s16 next_space_index;
+/* 0x18 */ char unk_18;
+/* 0x19 */ s8 item;
+/* 0x1A */ s8 turn_status;
+/* 0x1B */ char unk_1B[0x0F];
+/* 0x2A */ s16 coinPeak; //used for coin star
+/* 0x2B */ char unk_2B[0x0A]
+} playerMain; //sizeof 0x34
+
+P1 - 800FD2C0
+P2 - 800FD2F4
+P3 - 800FD328
+P4 - 800FD35C
+
+
+typedef struct {
+/* 0x00 */ char unk_00[2];
+/* 0x02 */ char setPlayerRoll;
+/* 0x03 */ char unk_03[2];
+/* 0x05 */ char diceRoll1;
+/* 0x06 */ char diceRoll2;
+/* 0x07 */ char diceRoll3;
+/* 0x08 */ char curDiceCount;
+} playerDice; //sizeof 0x4C
+
+P1 - 800DF4C0
+P2 - 800DF50C
+P3 - 800DF558
+P4 - 800DF5A4
+
+
+enum Item {
+/* 0x00 */ Item_Mushroom;
+/* 0x01 */ Item_Skeleton Key;
+/* 0x02 */ Item_Plunder Chest;
+/* 0x03 */ Item_Bowser Bomb;
+/* 0x04 */ Item_Dueling_Glove;
+/* 0x05 */ Item_Warp_Block;
+/* 0x06 */ Item_Golden_Mushroom;
+/* 0x07 */ Item_Boo_Bell;
+/* 0x08 */ Item_Bowser_Suit;
+/* 0x09 */ Item_Magic_Lamp;
+};
